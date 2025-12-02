@@ -10,10 +10,10 @@ def optimize(params):
     timesteps = params['timesteps']
     months_in_timestep = params['months_in_timestep']
     emissions_grams = params['emissions_grams']
-    costs_USD = ['costs_USD']
-    incomes = ['incomes']
-    probabilities = ['probabilities']
-    percent_income = ['percent_income']
+    costs_USD = params['costs_USD']
+    incomes = params['incomes']
+    probabilities = params['probabilities']
+    percent_income = params['percent_income']
 
     # Calculate number of years modeled
     years = (months_in_timestep * timesteps) / 12
@@ -34,9 +34,9 @@ def optimize(params):
     X = m.addVars(consumer, method, timestep, vtype=GRB.BINARY, name='X')
     
     # Objective function
-    m.setObjective(emissions_grams[1]*gp.quicksum(X[i,1,k] for i in consumer for k in timestep) 
-                   + emissions_grams[2]*gp.quicksum(X[i,2,k] for i in consumer for k in timestep) 
-                   + emissions_grams[3]*gp.quicksum(X[i,3,k] for i in consumer for k in timestep) , GRB.MINIMIZE)
+    m.setObjective(emissions_grams[0]*gp.quicksum(X[i,0,k] for i in consumer for k in timestep) 
+                   + emissions_grams[1]*gp.quicksum(X[i,1,k] for i in consumer for k in timestep) 
+                   + emissions_grams[2]*gp.quicksum(X[i,2,k] for i in consumer for k in timestep) , GRB.MINIMIZE)
     
     # Constraints
     
@@ -48,7 +48,7 @@ def optimize(params):
     # Method 2 can only be used if method 1 was used before
     for i in consumer:
         for k in timestep:
-            m.addConstr(gp.quicksum(X[i,1,s] for s in k) >= X[i,2,k+1])
+            m.addConstr(X[i,1,k] <= gp.quicksum(X[i,0,s] for s in range(0,k)))
 
     # Income constraints
     for i in consumer:
