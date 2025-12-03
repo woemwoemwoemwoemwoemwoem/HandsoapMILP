@@ -2,7 +2,6 @@ import graphs
 import optimize
 
 # Create dictionary of parameters
-print("is this working")
 params = {'consumers': 25, 
             'methods': 3, 
             'timesteps': 8,

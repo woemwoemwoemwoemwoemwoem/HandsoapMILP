@@ -16,8 +16,6 @@ def optimize(params):
     probabilities = params['probabilities']
     percent_income = params['percent_income']
 
-
-
     # Create distribution of incomes
     # Ensure each income group appears at least once (useful for small 'consumers')
     if consumers <= len(incomes):
