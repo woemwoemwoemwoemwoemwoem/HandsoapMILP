@@ -4,7 +4,7 @@ import optimize
 # Create dictionary of parameters
 params = {'consumers': 25, 
             'methods': 3, 
-            'timesteps': 8,
+            'timesteps': 12,
             'soap_purchase_per_yr': 4,
             'emissions_grams': [578.4, 0.653, 82.8],
             'costs_USD': [15,6,5],

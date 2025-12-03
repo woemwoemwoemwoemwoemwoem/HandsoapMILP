@@ -18,6 +18,7 @@ def optimize(params):
 
     # Create distribution of incomes
     # Ensure each income group appears at least once (useful for small 'consumers')
+    np.random.seed(42);
     if consumers <= len(incomes):
         # If consumers fewer or equal to income categories, just take the first `consumers` incomes
         consumer_incomes = np.array(incomes[:consumers])
