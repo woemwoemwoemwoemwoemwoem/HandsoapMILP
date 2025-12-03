@@ -3,7 +3,7 @@ import optimize
 
 # Create dictionary of parameters
 print("is this working")
-params = {'consumers': 10, 
+params = {'consumers': 25, 
             'methods': 3, 
             'timesteps': 8,
             'soap_purchase_per_yr': 4,
